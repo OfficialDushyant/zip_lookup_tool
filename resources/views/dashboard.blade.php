@@ -9,9 +9,33 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    You're logged in!
+                    <form method="POST" action="{{ route('dashboard.lookup') }}">
+                        @csrf
+
+                        <div class="flex items-baseline justify-center mt-4">
+                            <div class="flex items-baseline">
+                                <x-text-input id="zip" class="block mt-1 min-w-max" placeholder="US Zip code" type="text" name="zip"
+                                    :value="old('zip')" required autofocus />
+    
+                                <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                                    
+                            </div>
+                            <x-primary-button class="ml-4 min-h-full">
+                                {{ __('Submit') }}
+                            </x-primary-button>
+                        </div>
+                    </form>
+                    <div class="flex items-baseline justify-start mt-4">
+                        @if(isset($text) )
+                            {!! nl2br($text) !!}    
+                        @endif
+                        @if($error != '')
+                            {!! nl2br($error) !!}  
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
+        
     </div>
 </x-app-layout>
