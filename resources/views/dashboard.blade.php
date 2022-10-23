@@ -14,11 +14,11 @@
 
                         <div class="flex items-baseline justify-center mt-4">
                             <div class="flex items-baseline">
-                                <x-text-input id="zip" class="block mt-1 min-w-max" placeholder="US Zip code" type="text" name="zip"
-                                    :value="old('zip')" required autofocus />
-    
+                                <x-text-input id="zip" class="block mt-1 min-w-max" placeholder="US Zip code"
+                                    type="text" name="zip" :value="old('zip')" required autofocus />
+
                                 <x-input-error :messages="$errors->get('name')" class="mt-2" />
-                                    
+
                             </div>
                             <x-primary-button class="ml-4 min-h-full">
                                 {{ __('Submit') }}
@@ -26,16 +26,16 @@
                         </div>
                     </form>
                     <div class="flex items-baseline justify-start mt-4">
-                        @if(isset($text)  )
-                            {!! nl2br($text) !!}    
+                        @if (isset($text))
+                            {!! nl2br($text) !!}
                         @endif
-                        @if(isset($error))
-                            {!! nl2br($error) !!}  
+                        @if (isset($error))
+                            {!! nl2br($error) !!}
                         @endif
                     </div>
                 </div>
             </div>
         </div>
-        
+
     </div>
 </x-app-layout>
