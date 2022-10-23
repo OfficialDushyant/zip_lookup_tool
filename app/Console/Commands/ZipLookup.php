@@ -32,7 +32,7 @@ class ZipLookup extends Command
         $zip_lookup = new ZipLookupService();
         if(!$zip_lookup->validateZipCode($this->argument('zip'))){
             $this->error("Expecting US based zip code.");
-            return;
+            return 1;
         }
 
 
@@ -40,19 +40,20 @@ class ZipLookup extends Command
 
         if(!property_exists($zip_response, 'places')){
             $this->error("No result found for ". $this->argument('zip'));
-            return;
+            return 1;
         }
 
         $place = $zip_response->places[0];
         $this->newLine();
         $this->line('Zippopotam response for '. $zip_response->{'post code'});
         $this->newLine();
-        $console_display  = "Postal code: " . $zip_response->{'post code'}. "\n";
-        $console_display .= "Country: " . $zip_response->country. "\n";
-        $console_display .= "Place: " . $place->{'place name'}. "\n";
+        $console_display  = "City: " . $place->{'place name'}. "\n";
         $console_display .= "State: " . $place->state. "\n";
+        $console_display .= "Country: " . $zip_response->country. "\n";
+        $console_display .= "Postal code: " . $zip_response->{'post code'}. "\n";
         $console_display .= "(latitude,longitude): (" . $place->latitude .",". $place->longitude . ")\n";
 
        $this->info($console_display);
+       return 0;
     }
 }
