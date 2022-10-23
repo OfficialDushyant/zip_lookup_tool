@@ -15,6 +15,9 @@ class ZipLookupToolController extends Controller
         $zip_lookup = new ZipLookupService();
         if(!$zip_lookup->validateZipCode($request->zip)){
             $error_message .= "Expecting US based zip code. \n";
+            return view('dashboard', [ 
+                "error"=>$error_message
+            ]);
         }
 
 
@@ -30,6 +33,9 @@ class ZipLookupToolController extends Controller
         }
         else{
             $error_message .= "No result found for \"". $request->zip."\"\n";
+            return view('dashboard', [ 
+                "error"=>$error_message
+            ]);
         }
        
 

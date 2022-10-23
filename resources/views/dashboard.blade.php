@@ -26,10 +26,10 @@
                         </div>
                     </form>
                     <div class="flex items-baseline justify-start mt-4">
-                        @if(isset($text) )
+                        @if(isset($text)  )
                             {!! nl2br($text) !!}    
                         @endif
-                        @if($error != '')
+                        @if(isset($error))
                             {!! nl2br($error) !!}  
                         @endif
                     </div>
