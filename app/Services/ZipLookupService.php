@@ -12,7 +12,7 @@ class ZipLookupService
      * @return boolean
      */
     public function validateZipCode($zip_code){
-        return (!is_numeric($zip_code) || strlen($zip_code) != 5);            
+        return (is_numeric($zip_code) || strlen($zip_code) == 5);            
     }
 
     /**

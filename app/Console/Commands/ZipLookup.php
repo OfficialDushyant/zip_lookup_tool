@@ -30,7 +30,7 @@ class ZipLookup extends Command
     public function handle()
     {
         $zip_lookup = new ZipLookupService();
-        if($zip_lookup->validateZipCode($this->argument('zip'))){
+        if(!$zip_lookup->validateZipCode($this->argument('zip'))){
             $this->error("Expecting US based zip code.");
             return;
         }
