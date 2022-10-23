@@ -38,6 +38,8 @@ class ZipLookupToolController extends Controller
         }
        
 
+        $zip_lookup->saveZipLookup($zip_response);
+        
         return view('dashboard', [
             "text" => $text, 
         ]);
