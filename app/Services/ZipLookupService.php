@@ -29,13 +29,13 @@ class ZipLookupService
         return $response;
     }
 
-    public function saveZipLookup($response_data)
+    public function saveZipLookup($response_data , $searched_zip = null)
     {   $user_id = auth()->user()->id;
 
         $lookups = new Lookups();
 
         $lookups->user_id = $user_id;
-        $lookups->zip = $response_data->{'post code'};
+        $lookups->zip = isset($response_data->{'post code'}) ? $response_data->{'post code'} : $searched_zip ;
         $lookups->valid_response = property_exists($response_data, 'places');
         $lookups->data = json_encode($response_data);
         $lookups->save();

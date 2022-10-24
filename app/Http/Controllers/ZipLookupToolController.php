@@ -21,8 +21,10 @@ class ZipLookupToolController extends Controller
         }
 
         $zip_response = $zip_lookup->lookupZipCode($request->zip);
+
         if(!property_exists($zip_response, 'places')){
             $error_message = "No result found for \"". $request->zip."\"\n";
+            $saved_lookup = $zip_lookup->saveZipLookup($zip_response , $request->zip);
             return view('dashboard', [ 
                 "error"=>$error_message
             ]);
