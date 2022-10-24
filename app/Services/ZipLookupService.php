@@ -31,6 +31,7 @@ class ZipLookupService
 
     public function saveZipLookup($response_data)
     {   $user_id = auth()->user()->id;
+
         $lookups = new Lookups();
 
         $lookups->user_id = $user_id;
@@ -38,6 +39,7 @@ class ZipLookupService
         $lookups->valid_response = property_exists($response_data, 'places');
         $lookups->data = json_encode($response_data);
         $lookups->save();
+        return $lookups;
     }
 }
 
