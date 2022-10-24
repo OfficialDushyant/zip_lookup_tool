@@ -13,7 +13,7 @@ class ZipLookup extends Command
      *
      * @var string
      */
-    protected $signature = 'zip:lookup {zip : US zip code}';
+    protected $signature = 'zip:lookup {zip}';
 
     /**
      * The console command description.
@@ -32,7 +32,7 @@ class ZipLookup extends Command
         $zip_lookup = new ZipLookupService();
         if(!$zip_lookup->validateZipCode($this->argument('zip'))){
             $this->error("Expecting US based zip code.");
-            return 1;
+            return Command::FAILURE;
         }
 
 
@@ -40,7 +40,7 @@ class ZipLookup extends Command
 
         if(!property_exists($zip_response, 'places')){
             $this->error("No result found for ". $this->argument('zip'));
-            return 1;
+            return Command::FAILURE;
         }
 
         $place = $zip_response->places[0];
@@ -54,6 +54,6 @@ class ZipLookup extends Command
         $console_display .= "(latitude,longitude): (" . $place->latitude .",". $place->longitude . ")\n";
 
        $this->info($console_display);
-       return 0;
+       return Command::SUCCESS;
     }
 }
