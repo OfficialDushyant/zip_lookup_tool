@@ -29,14 +29,14 @@ class ZipLookup extends Command
      */
     public function handle()
     {
-        $zip_lookup = new ZipLookupService();
-        if(!$zip_lookup->validateZipCode($this->argument('zip'))){
+        $zip_lookup_service = new ZipLookupService();
+        if(!$zip_lookup_service->validateZipCode($this->argument('zip'))){
             $this->error("Expecting US based zip code.");
             return Command::FAILURE;
         }
 
 
-        $zip_response = $zip_lookup->lookupZipCode($this->argument('zip'));
+        $zip_response = $zip_lookup_service->lookupZipCode($this->argument('zip'));
 
         if(!property_exists($zip_response, 'places')){
             $this->error("No result found for ". $this->argument('zip'));
