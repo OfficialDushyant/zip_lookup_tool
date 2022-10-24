@@ -7,7 +7,12 @@ use App\Services\ZipLookupService;
 
 class ZipLookupToolController extends Controller
 {
-    //
+    /**
+     * Handel zip lookup request
+     *
+     * @param Request $request
+     * @return View dashboard
+     */
     public function lookupZipCode(Request $request)
     {
     
