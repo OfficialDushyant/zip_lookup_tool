@@ -2,6 +2,7 @@
 
 namespace App\Services;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use App\Models\Lookups;
 use App\Models\User;
 
@@ -34,12 +35,19 @@ class ZipLookupService
 
         $lookups = new Lookups();
 
-        $lookups->user_id = $user_id;
-        $lookups->zip = isset($response_data->{'post code'}) ? $response_data->{'post code'} : $searched_zip ;
-        $lookups->valid_response = property_exists($response_data, 'places');
-        $lookups->data = json_encode($response_data);
-        $lookups->save();
-        return $lookups;
+        
+        try {
+            $lookups->user_id = $user_id;
+            $lookups->zip = isset($response_data->{'post code'}) ? $response_data->{'post code'} : $searched_zip ;
+            $lookups->valid_response = property_exists($response_data, 'places');
+            $lookups->data = json_encode($response_data);
+            $lookups->save();
+            return $lookups;
+
+        } catch (\Throwable $e) {
+            Log::error($e->getMessage());
+            return $e;
+        }
     }
 }
 
