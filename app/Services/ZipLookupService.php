@@ -30,12 +30,18 @@ class ZipLookupService
         return $response;
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param [object] $response_data
+     * @param [string] $searched_zip
+     * @return mixed
+     */
     public function saveZipLookup($response_data , $searched_zip = null)
     {   $user_id = auth()->user()->id;
 
         $lookups = new Lookups();
 
-        
         try {
             $lookups->user_id = $user_id;
             $lookups->zip = isset($response_data->{'post code'}) ? $response_data->{'post code'} : $searched_zip ;
