@@ -31,7 +31,7 @@ class ZipLookupService
     }
 
     /**
-     * Undocumented function
+     * Saves the lookup data in to lookups table
      *
      * @param [object] $response_data
      * @param [string] $searched_zip
