@@ -2,9 +2,10 @@
 
 namespace Tests\Unit;
 
+use App\Models\User;
 use App\Services\ZipLookupService;
 use Tests\TestCase;
-
+use Illuminate\Support\Carbon;
 class ZipLookupServiceTest extends TestCase
 {
     /**
@@ -37,4 +38,21 @@ class ZipLookupServiceTest extends TestCase
 
     }
 
+    public function test_zip_tool_lookup_saved()
+    {
+        $user = User::factory()->create();
+        $this->actingAs($user);
+        $zip_code = '00210';
+        $zip_lookup = new ZipLookupService();
+        $zip_response = $zip_lookup->lookupZipCode($zip_code);
+        $saved_lookup = $zip_lookup->saveZipLookup($zip_response);
+        $data = json_decode($saved_lookup->data);
+        $place = $data->places[0];
+        $this->assertEquals($place->{'place name'}, 'Portsmouth');
+        $this->assertEquals($place->state, 'New Hampshire');
+        $this->assertEquals($data->{'post code'}, $zip_code);
+        $this->assertEquals($data->country, 'United States');
+
+
+    }
 }
