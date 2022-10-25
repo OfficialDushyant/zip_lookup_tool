@@ -33,6 +33,10 @@ class LookupReport extends Command
      */
     public function handle()
     {
+        if(!filter_var( $this->argument('email'), FILTER_VALIDATE_EMAIL)) {
+            $this->error("Provided email is not valid");
+            return Command::FAILURE;
+        }
         try {
             $data = User::whereHas('lookups', function($query){
                 $query->whereBetween('created_at' , [Carbon::now()->subHours($this->option('hours')),Carbon::now()]);
