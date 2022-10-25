@@ -42,9 +42,11 @@ MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS="info@ziplookuptool.com"
 MAIL_FROM_NAME="${APP_NAME}"
 ```
-
-
 ---
+### DB MIGRATION
+
+- Run `php artisan migrate`.
+This should create `users`, `lookups`, `password_reset`, `password_access_tokens`, `migrations`, and `failed_jobs` tables in zip_lookup DB.
 ### Custom Artisan command
 
 1) `php artisan zip:lookup <zip code>` zip code as a argument to this command is required.
