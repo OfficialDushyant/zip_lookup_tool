@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('lookups', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(User::class)->constrained();
             $table->char('zip',10);
             $table->boolean('valid_response');
             $table->json('data')->nullable();

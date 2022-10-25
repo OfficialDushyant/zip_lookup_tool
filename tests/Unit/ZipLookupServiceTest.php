@@ -5,9 +5,11 @@ namespace Tests\Unit;
 use App\Models\User;
 use App\Services\ZipLookupService;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Carbon;
 class ZipLookupServiceTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * Test for valid zip code return value.
      *
